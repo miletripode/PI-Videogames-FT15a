@@ -33,12 +33,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     platforms: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    createdInDataBase:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
   });
 };

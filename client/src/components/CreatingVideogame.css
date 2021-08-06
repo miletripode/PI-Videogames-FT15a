@@ -1,0 +1,32 @@
+:root {
+    --bg-color: #26191B;
+    --btn-color: #584153;
+    --letter-color: #F6ACC8;
+    --font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+.creating{
+    background-color: var(--bg-color);
+    width: 100%;    
+    height: 100vh;         
+    background-size: cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.form{
+    background-color: var(--btn-color);
+    color: var(--letter-color);
+    font-family: var(--font-family);
+    font-size: 20px;
+    width: 500px;
+    height: 500px;
+    border-radius: 5px;
+    border: var(--letter-color) solid 1px;
+    border-color: var(--letter-color);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+   
+}

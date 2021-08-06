@@ -1,6 +1,4 @@
 const axios = require('axios');
-var express = require ('express');
-const router = express.Router();
 const {API_KEY} = process.env;
 const apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`;
 
@@ -11,7 +9,8 @@ const getApiInfo = async () =>{
             id: v.id,
             name: v.name,
             image: v.background_image,
-            genres: v.genres.map(g => g.name)
+            genres: v.genres.map(g => g.name),
+            platforms: v.platforms.map(g => g.platform.name)
         }
     })
     return apiData;
