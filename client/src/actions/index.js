@@ -27,9 +27,37 @@ export function getPlatforms(){
     }
 }
 
+export function getVideogameDetail(id){
+    return async function(dispatch){
+        var json = await axios.get('http://localhost:3001/videogame/'+id)
+        return dispatch({type: 'GET_VIDEOGAME_DETAIL', payload: json.data})
+    }
+}
+
 export function postVideogame(payload){
     return async function(){
         const response = await axios.post('http://localhost:3001/videogame',payload)
         return response;
+    }
+}
+
+export function orderAlphabetically(payload){
+    return {
+        type: 'ORDER_ALPHABETICALLY',
+        payload
+    }
+}
+
+export function orderByRating(payload){
+    return {
+        type: 'ORDER_BY_RATING',
+        payload
+    }
+}
+
+export function filterCreated(payload){
+    return {
+        type: 'ORDER_BY_RATING',
+        payload
     }
 }

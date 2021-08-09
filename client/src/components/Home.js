@@ -1,10 +1,12 @@
 
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { getAllVideoGames } from '../actions/index';
+import { getAllVideoGames, orderAlphabetically, orderByRating } from '../actions/index';
 import {NavLink} from 'react-router-dom';
 import Card from './Card'
 import './Home.css'
+import Page from "./Page";
+import SearchBar from './SearchBar';
 
 export default function Home(){
 
@@ -14,16 +16,42 @@ export default function Home(){
 
     const [loading, setLoading] = useState(false);
 
+    const [currentPage,setCurrentPage] = useState(1);
+    const [videogamesPerPage,setVideogamesPerPage]= useState(10);
+    const indexOfLastVideogame = currentPage * videogamesPerPage; 
+    const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; 
+    const currentVideogames = allVideoGames.slice(indexOfFirstVideogame,indexOfLastVideogame)
+    
+    const [orden, setOrden] = useState('')
+
+    const paginado = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    }; 
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(getAllVideoGames());
+    };
+
+    function handleSort (e){
+        e.preventDefault();
+        dispatch(orderAlphabetically(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    };
+
+    function handleSortRating (e){
+        e.preventDefault();
+        dispatch(orderByRating(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    };
+      
     useEffect(() => {
         dispatch(getAllVideoGames(), 
         setLoading(true),
         setTimeout(()=>{setLoading(false);},5000))
     }, [])
-
-    function handleOnClick(e){
-        e.preventDefault();
-        dispatch(getAllVideoGames())
-    }
 
     return (
         <div className='home'>
@@ -31,7 +59,13 @@ export default function Home(){
                 <NavLink className='nav-link' to='/create'>Create Videogame</NavLink>
             <div>
             <div>
-                <select>
+                <SearchBar/>
+            </div>
+            <div>
+                <button onClick={(e) => {handleClick(e)}}>Refresh</button>
+            </div>
+            <div>
+                <select onChange={e => handleSort(e)}>
                     <option value='az'>A-Z</option>
                     <option value='za'>Z-A</option>
                 </select>
@@ -40,13 +74,23 @@ export default function Home(){
                     <option value='created'>Created</option>
                     <option value='existing'>Existing</option>
                 </select>
+                <select onChange={e => handleSortRating(e)}>
+                    <option value='asc'>Highest Rating</option>
+                    <option value='des'>Lowest Rating</option>
+                </select>
             </div>
+            <Page
+                videogamesPerPage={videogamesPerPage}
+                allVideoGames={allVideoGames.length} 
+                paginado={paginado}
+            />
             </div>
                 { loading ? ( <div class="loading">Loading...</div>) : 
-                (allVideoGames && allVideoGames.map(v => 
-                <Card img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} name={v.name} genres={!v.hasOwnProperty('createdInDataBase')? v.genres + ' ' : v.genres.map(e => e.name + (' '))}/>
+                (currentVideogames && currentVideogames.map(v => 
+                <Card id={v.id} img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} name={v.name} genres={!v.hasOwnProperty('createdInDataBase')? v.genres + ' ' : v.genres.map(e => e.name + ('\n'))}/>
                 ))}
             </div>
+          
         </div>
     )
 }

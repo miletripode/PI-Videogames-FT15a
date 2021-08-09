@@ -96,21 +96,27 @@ return(
                 onChange={(e)=>handleChange(e)} 
                 />
             </div>
+            <div>
+            Genres
             <select onChange={(e) => handleSelect(e)}>
                 {genres.map((g) => (
                     <option value={g.name}>{g.name}</option>
                 ))}
             </select>
-            <ul><li>{input.genres.map(e => e + " ,")}</li></ul>
-            
+            <div>{input.genres.map(e => e + " ,")}</div>
+            </div>
+            <br/>
+            <div>
+            Platforms
             <select onChange={(e) => handleSelectPlatforms(e)}>
                 {platforms.map((p) => (
                     <option value={p}>{p}</option>
                 ))}
             </select>
-            <ul><li>{input.platforms.map(e => e + " ,")}</li></ul>
+            <div>{input.platforms.map(e => e + " ,")}</div>
+            </div>
             <br/>
-            <button type='submit'>Create Videogame</button>​
+            <button className='btn' type='submit'>Create Videogame</button>​
         </form>
         </div>
     </div>

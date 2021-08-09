@@ -1,3 +1,9 @@
+:root {
+    --bg-color: #26191B;
+    --btn-color: #584153;
+    --letter-color: #F6ACC8;
+    --font-family: 'ZCOOL QingKe HuangYou', cursive;
+  }
 .container{
     float: left;
     position: relative;
@@ -6,9 +12,9 @@
     margin: 7px;
     margin-left: 15px;
     top: 10px;
-    width: 200px;
-    height:370px;
-    border-radius: 10px;
+    width: 220px;
+    height: 310px;
+    border-radius: 5px;
     box-shadow: 0px 0px 10px;
     transition: transform 250ms;
 }
@@ -18,26 +24,31 @@
 }
 
 .image{
-    width: 200px;
-    height: 150px;
+    width: 210px;
+    height: 170px;
+    margin: 5px;
     float: left;
     border-radius: 5px;
 }
 
 .navlink{
     text-decoration: none;
-    color:  #FFEBC9
+    color:  #FFEBC9;
+    font-size: 30px;
+    font-family: var(--font-family);
 }
 
 .navlink:hover{
     text-decoration: underline;
+    
 }
 
 .subcontainer{
     margin-left: 10px;
+    
 }
-
 .genres{
     color: #D79771;
     font-size: 20px;
+    font-family: var(--font-family);
 }
