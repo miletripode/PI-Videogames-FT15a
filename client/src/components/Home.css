@@ -5,6 +5,12 @@
   --font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
 
+li{
+  list-style-type: none;
+   display: inline;
+   padding-right: 5px;
+}
+
 .home{
   background-color: var(--bg-color);
   width: 100vw;    
@@ -19,28 +25,14 @@
   background-color: var(--btn-color);
   color: var(--letter-color);
   font-size: 1.25rem;
-  float: left;
   text-decoration: none;
   padding: 10px;
   margin: 5px;
   border-radius: 5px;
   font-family: var(--font-family);
+  float: left;
 }
 .nav-link:hover{
-  background-color: var(--letter-color);
-  color: var(--btn-color);
-}
-.btnRefresh{
-  background-color: var(--btn-color);
-  color: var(--letter-color);
-  float: left;
-  font-size: 30px;
-  border-radius: 5px;
-  margin: 13px;
-  border: none;
-  height: 35px;
-}
-.btnRefresh:hover{
   background-color: var(--letter-color);
   color: var(--btn-color);
 }

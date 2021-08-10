@@ -14,7 +14,16 @@ router.get('/:id', async (req, res) => {
 
     if(id){
         let videoGameDetail = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-        videoGameDetail = videoGameDetail.data;
+        videoGameDetail = videoGameDetail.data
+        videoGameDetail = {
+            id: videoGameDetail.id,
+            name: videoGameDetail.name,
+            image: videoGameDetail.background_image,
+            genres: videoGameDetail.genres.map(g => g.name),
+            platforms: videoGameDetail.platforms.map(g => g.platform.name),
+            description: videoGameDetail.description,
+            released: videoGameDetail.released
+        }
         if(videoGameDetail){
             return res.status(200).send(videoGameDetail)
         }

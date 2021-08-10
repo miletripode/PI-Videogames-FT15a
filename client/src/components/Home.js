@@ -56,15 +56,16 @@ export default function Home(){
     return (
         <div className='home'>
             <div>
-                <NavLink className='nav-link' to='/create'>Create Videogame</NavLink>
-            <div>
-            <div>
-                <SearchBar/>
-            </div>
-            <div>
-                <button onClick={(e) => {handleClick(e)}}>Refresh</button>
-            </div>
-            <div>
+                <nav className='navBar'>
+                    <ul>
+                        <li>
+                        <NavLink className='nav-link' to='/create'>Create Videogame</NavLink>
+                        </li>
+                        <li>
+                        <SearchBar/>
+                        </li>
+                        <li>
+                        <div>
                 <select onChange={e => handleSort(e)}>
                     <option value='az'>A-Z</option>
                     <option value='za'>Z-A</option>
@@ -79,18 +80,31 @@ export default function Home(){
                     <option value='des'>Lowest Rating</option>
                 </select>
             </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                
+            <div>
+            <div>
+               
+            </div>
+            
+            <div className='page'>
             <Page
                 videogamesPerPage={videogamesPerPage}
                 allVideoGames={allVideoGames.length} 
                 paginado={paginado}
             />
             </div>
+            
+            </div>
                 { loading ? ( <div class="loading">Loading...</div>) : 
                 (currentVideogames && currentVideogames.map(v => 
                 <Card id={v.id} img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} name={v.name} genres={!v.hasOwnProperty('createdInDataBase')? v.genres + ' ' : v.genres.map(e => e.name + ('\n'))}/>
                 ))}
             </div>
-          
         </div>
     )
 }

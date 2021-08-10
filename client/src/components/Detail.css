@@ -1,0 +1,26 @@
+:root {
+    --bg-color: #26191B;
+    --btn-color: #584153;
+    --letter-color: #F6ACC8;
+    --font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+.general{
+    background-color: var(--btn-color);
+}
+
+.containerDetail{
+    color: var(--letter-color);
+    font-family: var(--font-family);
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgDetail{
+    width: 400px;
+    height: 300px;
+    border-radius: 5px;
+}
