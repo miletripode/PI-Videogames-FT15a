@@ -1,5 +1,6 @@
 const initialState = {
     videogames: [],
+    allVideogames: [],
     videogameDetail: {},
     genres: [],
     platforms: [],
@@ -14,7 +15,8 @@ export default function rootReducer(state = initialState, action){
         case 'GET_VIDEOGAMES': 
         return {
             ...state,
-            videogames: action.payload
+            videogames: action.payload,
+            allVideogames: action.payload
         }
         case 'GET_VIDEOGAME_DETAIL': 
         return {
@@ -38,7 +40,7 @@ export default function rootReducer(state = initialState, action){
         }
         case 'ORDER_ALPHABETICALLY':
            let sortedArray = action.payload === 'az' ? 
-           state.videogames.sort(function(a,b){
+           state.allVideogames.sort(function(a,b){
                if(a.name > b.name){
                    return 1
                }
@@ -47,7 +49,7 @@ export default function rootReducer(state = initialState, action){
                }
                return 0
            }) : 
-           state.videogames.sort(function(a,b){
+           state.allVideogames.sort(function(a,b){
             if(a.name > b.name){
                 return -1
             }
@@ -62,7 +64,7 @@ export default function rootReducer(state = initialState, action){
         }
         case 'ORDER_BY_RATING':
            let arrayByRating = action.payload === 'asc' ? 
-           state.videogames.sort(function(a,b){
+           state.allVideogames.sort(function(a,b){
                if(a.rating > b.rating){
                    return 1
                }
@@ -71,7 +73,7 @@ export default function rootReducer(state = initialState, action){
                }
                return 0
            }) : 
-           state.videogames.sort(function(a,b){
+           state.allVideogames.sort(function(a,b){
             if(a.rating > b.rating){
                 return -1
             }
@@ -79,11 +81,38 @@ export default function rootReducer(state = initialState, action){
                 return 1
             }
             return 0
-        }) 
-        return{
-            ...state,
-            videogames: arrayByRating
-        }
+            }) 
+            return{
+                ...state,
+                videogames: arrayByRating
+            }
+        case 'FILTER_BY_GENRE':
+            let filtered = state.allVideogames.filter(f => {
+                if(f.hasOwnProperty('createdInDataBase')){
+                    let aux = f.genres.map(g => g.name).toString()
+                    if(aux.includes(action.payload)){
+                        return f
+                    }
+                }
+                else{
+                    if(f.genres.includes(action.payload)){
+                        return f
+                    }
+                }
+            })
+            return{
+                ...state,
+                videogames: filtered
+            }
+        case 'FILTER_CREATED':
+            let filterCreated = action.payload == 'created' ? 
+            state.allVideogames.filter(f => f.hasOwnProperty('createdInDataBase')) 
+            :
+            state.allVideogames.filter(f => !f.hasOwnProperty('createdInDataBase'))
+            return{
+                ...state,
+                videogames: filterCreated
+            }
         
         default: return state
     }

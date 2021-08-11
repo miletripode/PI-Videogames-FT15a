@@ -39,6 +39,7 @@ router.get('/', async (req, res, next) => {
                     name: v.name,
                     image: v.background_image,
                     genres: v.genres.map(g => g.name),
+                    rating: v.rating,
                     platforms: v.platforms.map(g => g.platform.name)
                 }
             })

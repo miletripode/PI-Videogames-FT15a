@@ -24,6 +24,7 @@ return (
             <img className='imgDetail' src= {myVideogame.image}/>
             <h1>{myVideogame.name}</h1>
             <h2>Released: {myVideogame.released}</h2>
+            <h2>Rating: {myVideogame.rating}</h2>
             <h3>Genres: {!myVideogame.createdInDb ? myVideogame.genres + ' ' : myVideogame.genres.map(e => e.name + (' '))}</h3>
             <br/>
             <h4>Description</h4>

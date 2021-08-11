@@ -1,7 +1,8 @@
 
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { getAllVideoGames, orderAlphabetically, orderByRating } from '../actions/index';
+import { getAllVideoGames, orderAlphabetically, orderByRating, 
+getGenres, filterByGenre, filterCreated } from '../actions/index';
 import {NavLink} from 'react-router-dom';
 import Card from './Card'
 import './Home.css'
@@ -13,11 +14,12 @@ export default function Home(){
     const dispatch = useDispatch();
 
     const allVideoGames = useSelector(state => state.videogames)
+    const allGenres = useSelector(state => state.genres)
 
     const [loading, setLoading] = useState(false);
 
     const [currentPage,setCurrentPage] = useState(1);
-    const [videogamesPerPage,setVideogamesPerPage]= useState(10);
+    const [videogamesPerPage,setVideogamesPerPage]= useState(9);
     const indexOfLastVideogame = currentPage * videogamesPerPage; 
     const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; 
     const currentVideogames = allVideoGames.slice(indexOfFirstVideogame,indexOfLastVideogame)
@@ -27,11 +29,6 @@ export default function Home(){
     const paginado = (pageNumber) => {
       setCurrentPage(pageNumber);
     }; 
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        dispatch(getAllVideoGames());
-    };
 
     function handleSort (e){
         e.preventDefault();
@@ -46,11 +43,25 @@ export default function Home(){
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     };
+
+    function handleSelectGenres (e){
+        e.preventDefault();
+        dispatch(filterByGenre(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    };
+    function handleSelectCreated (e){
+        e.preventDefault();
+        dispatch(filterCreated(e.target.value))
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    };
       
     useEffect(() => {
-        dispatch(getAllVideoGames(), 
-        setLoading(true),
-        setTimeout(()=>{setLoading(false);},5000))
+        dispatch(getAllVideoGames()); 
+        dispatch(getGenres());
+        setLoading(true);
+        setTimeout(()=>{setLoading(false)},5000);
     }, [])
 
     return (
@@ -70,14 +81,21 @@ export default function Home(){
                     <option value='az'>A-Z</option>
                     <option value='za'>Z-A</option>
                 </select>
-                <select>
-                    <option value='status'>Genre</option>
-                    <option value='created'>Created</option>
-                    <option value='existing'>Existing</option>
+                <select onChange={e => handleSelectGenres(e)}>
+                <option>Genres</option>
+                {allGenres.map((g) => (
+                    <option value={g.name}>{g.name}</option>
+                ))}
                 </select>
                 <select onChange={e => handleSortRating(e)}>
-                    <option value='asc'>Highest Rating</option>
-                    <option value='des'>Lowest Rating</option>
+                    <option>Rating</option>
+                    <option value='des'>Highest Rating</option>
+                    <option value='asc'>Lowest Rating</option>
+                </select>
+                <select onChange={e => handleSelectCreated(e)}>
+                    <option>From</option>
+                    <option value='created'>Created</option>
+                    <option value='api'>Api</option>
                 </select>
             </div>
                         </li>
@@ -102,7 +120,11 @@ export default function Home(){
             </div>
                 { loading ? ( <div class="loading">Loading...</div>) : 
                 (currentVideogames && currentVideogames.map(v => 
-                <Card id={v.id} img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} name={v.name} genres={!v.hasOwnProperty('createdInDataBase')? v.genres + ' ' : v.genres.map(e => e.name + ('\n'))}/>
+                <Card id={v.id} 
+                img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} 
+                name={v.name} 
+                genres={!v.hasOwnProperty('createdInDataBase') ? 
+                v.genres.map(e => e+' \n ') : v.genres.map(e => e.name + ('\n'))}/>
                 ))}
             </div>
         </div>

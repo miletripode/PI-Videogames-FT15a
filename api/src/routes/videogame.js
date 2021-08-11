@@ -22,7 +22,8 @@ router.get('/:id', async (req, res) => {
             genres: videoGameDetail.genres.map(g => g.name),
             platforms: videoGameDetail.platforms.map(g => g.platform.name),
             description: videoGameDetail.description,
-            released: videoGameDetail.released
+            released: videoGameDetail.released,
+            rating: videoGameDetail.rating
         }
         if(videoGameDetail){
             return res.status(200).send(videoGameDetail)

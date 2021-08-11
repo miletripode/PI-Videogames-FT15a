@@ -23,8 +23,7 @@
     font-family: var(--font-family);
 }
 
-.number:hover{
+.number:active {
     background-color: var(--letter-color);
     color: var(--bg-color);
-}
-
+  }
