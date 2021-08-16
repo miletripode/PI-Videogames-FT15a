@@ -38,15 +38,21 @@ h1{
 input{
     border: none;
     border-radius: 5px;
-    height: 20px;
+    height: 25px;
     margin-left: 15px;
+}
+
+.danger{
+    color: red;
+    font-family: var(--font-family);
+    font-size: 17px;
 }
 
 .btn{
     width: 200px;
     border-radius:5px;
-    padding: 0.25em 0.5em;
-    font-size: 1.25rem;
+    padding: 5px;
+    font-size: 20px;
     cursor: pointer;
     line-height: 1.1;
     background-color: var(--btn-color);

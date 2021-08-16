@@ -22,7 +22,8 @@ router.get('/', async (req, res, next) => {
                 id: v.id,
                 name: v.name,
                 image: v.background_image,
-                genres: v.genres.map(g => g.name)
+                genres: v.genres.map(g => g.name),
+                rating: v.rating
             }
         });
         gamesByName.length ? 
@@ -48,7 +49,7 @@ router.get('/', async (req, res, next) => {
         Promise.all([dataBaseInfo,aux])
         .then((response) => {
             let [infoDb, infoApi] = response
-            return res.send(infoDb.concat(infoApi))
+            return res.status(200).send(infoDb.concat(infoApi))
         })
         .catch((err) => next(err))
         }

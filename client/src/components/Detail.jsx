@@ -18,17 +18,15 @@ useEffect(() => {
 return (
     <div className='general'>
         <Link to= '/home'>
-            <button>Volver</button>
+            <button className='btnBack'>Back</button>
         </Link>
+        <img className='imgDetail' src= {myVideogame.image ? myVideogame.image : "https://wallpapercave.com/wp/wp8824374.jpg"}/>
         <div className='containerDetail'>
-            <img className='imgDetail' src= {myVideogame.image}/>
             <h1>{myVideogame.name}</h1>
             <h2>Released: {myVideogame.released}</h2>
             <h2>Rating: {myVideogame.rating}</h2>
-            <h3>Genres: {!myVideogame.createdInDb ? myVideogame.genres + ' ' : myVideogame.genres.map(e => e.name + (' '))}</h3>
-            <br/>
-            <h4>Description</h4>
-            <h4>{myVideogame.description}</h4>
+            <h2>Description:  {myVideogame.description}</h2>
+            <h2>Genres: {!myVideogame.createdInDataBase ? myVideogame.genres + ' ' : myVideogame.genres.map(e => e.name + (' '))}</h2>
         </div>
     </div>
 )

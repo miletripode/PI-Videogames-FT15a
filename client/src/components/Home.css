@@ -1,14 +1,19 @@
 :root {
-  --bg-color: #470031;
-  --btn-color: #971549;
-  --letter-color: #FF9898;
+  --bg-color: #26191B;
+  --btn-color: #584153;
+  --letter-color: #F6ACC8;
   --font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+ul{
+  display: flex;
+  justify-content: center;
 }
 
 li{
   list-style-type: none;
-   display: inline;
-   padding-right: 5px;
+  display: inline;
+  padding-right: 5px;
 }
 
 
@@ -22,26 +27,11 @@ li{
   overflow:auto;
 }
 
-.nav-link{
-  background-color: var(--btn-color);
-  color: var(--letter-color);
-  font-size: 1.25rem;
-  text-decoration: none;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  font-family: var(--font-family);
-  float: left;
-}
-.nav-link:hover{
-  background-color: var(--letter-color);
-  color: var(--btn-color);
-}
 select {
   width: 150px;
   border-radius:5px;
   padding: 5px;
-  font-size: 1.25rem;
+  font-size: 20px;
   cursor: pointer;
   line-height: 1.1;
   background-color: var(--btn-color);

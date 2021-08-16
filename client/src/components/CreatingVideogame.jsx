@@ -2,14 +2,29 @@ import React, {useState,useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {getGenres, getPlatforms, postVideogame} from '../actions/index'
 import { useDispatch, useSelector } from 'react-redux';
-
 import './CreatingVideogame.css'
+
+export function validate(input) {
+    let errors = {};
+    if(!input.name){
+        errors.name = 'Name is required'
+    }
+    if(!input.description){
+        errors.description = 'Description is required'
+    }  
+    return errors;
+};
 
 export default function CreatingVideogame(){
     const history = useHistory()
+
     const dispatch = useDispatch()
+
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
+
+    const [errors, setErrors] = React.useState({});
+
     const [input,setInput] = useState({
         name: "",
         released: "",
@@ -17,9 +32,14 @@ export default function CreatingVideogame(){
         description:"",
         platforms: [],
         genres:[],
-    })
-  
+    })    
+    
    function handleChange(e){
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }));
+
        setInput({
            ...input,
            [e.target.name] : e.target.value
@@ -56,18 +76,24 @@ export default function CreatingVideogame(){
         dispatch(getPlatforms())
     }, []);
 return(
-    <div >
-        <div className='creating'>
+    <div className='creating'>
+        <Link to= '/home'>
+            <button className='btnBack'>Back</button>
+        </Link>
+        <div>
         <form onSubmit={(e)=>handleSubmit(e)} className='form'>
             <h1>Create your videogames!</h1>
             <div>
                 <label>Name:</label>
-                <input
+                <input className={errors.name && 'danger'}
                 type= "text"
                 value= {input.name}
                 name= "name"
                 onChange={(e)=>handleChange(e)} 
                 />
+                {errors.name && (
+                <p className="danger">{errors.name}</p>
+                )}
             </div>
             <div>
                 <label>Released:</label>
@@ -89,12 +115,15 @@ return(
             </div>
             <div>
                 <label>Description:</label>
-                <input
+                <input className={errors.description && 'danger'}
                 type= "text"
                 value= {input.description}
                 name= "description"
                 onChange={(e)=>handleChange(e)} 
                 />
+                {errors.description && (
+                <p className="danger">{errors.description}</p>
+                )}
             </div>
             <div>
             Genres

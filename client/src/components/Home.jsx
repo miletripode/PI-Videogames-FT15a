@@ -8,6 +8,7 @@ import Card from './Card'
 import './Home.css'
 import Page from "./Page";
 import SearchBar from './SearchBar';
+import NavBar from './NavBar';
 
 export default function Home(){
 
@@ -66,67 +67,58 @@ export default function Home(){
 
     return (
         <div className='home'>
+            <NavBar/>
             <div>
-                <nav className='navBar'>
-                    <ul>
-                        <li>
-                        <NavLink className='nav-link' to='/create'>Create Videogame</NavLink>
-                        </li>
-                        <li>
-                        <SearchBar/>
-                        </li>
-                        <li>
-                        <div>
+            <nav className='navBar'>
+            <ul>
+            <li>
                 <select onChange={e => handleSort(e)}>
-                    <option value='az'>A-Z</option>
-                    <option value='za'>Z-A</option>
+                <option value=''>Alphabetically</option>
+                <option value='az'>A-Z</option>
+                <option value='za'>Z-A</option>
                 </select>
+            </li>
+            <li>
                 <select onChange={e => handleSelectGenres(e)}>
-                <option>Genres</option>
+                <option value=''>Genres</option>
                 {allGenres.map((g) => (
-                    <option value={g.name}>{g.name}</option>
+                <option value={g.name}>{g.name}</option>
                 ))}
                 </select>
+            </li>
+            <li>
                 <select onChange={e => handleSortRating(e)}>
-                    <option>Rating</option>
-                    <option value='des'>Highest Rating</option>
-                    <option value='asc'>Lowest Rating</option>
+                <option value=''>Rating</option>
+                <option value='des'>Highest Rating</option>
+                <option value='asc'>Lowest Rating</option>
                 </select>
+            </li>
+            <li>
                 <select onChange={e => handleSelectCreated(e)}>
-                    <option>From</option>
-                    <option value='created'>Created</option>
-                    <option value='api'>Api</option>
+                <option value=''>From</option>
+                <option value='created'>Created</option>
+                <option value='api'>Api</option>
                 </select>
-            </div>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div>
-                
-            <div>
-            <div>
-               
-            </div>
-            
-            <div className='page'>
-            <Page
-                videogamesPerPage={videogamesPerPage}
-                allVideoGames={allVideoGames.length} 
-                paginado={paginado}
-            />
-            </div>
-            
-            </div>
-                { loading ? ( <div class="loading">Loading...</div>) : 
-                (currentVideogames && currentVideogames.map(v => 
-                <Card id={v.id} 
-                img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} 
-                name={v.name} 
-                genres={!v.hasOwnProperty('createdInDataBase') ? 
-                v.genres.map(e => e+' \n ') : v.genres.map(e => e.name + ('\n'))}/>
-                ))}
-            </div>
+            </li>
+            </ul>
+        </nav>
+        <div className='page'>
+        <Page
+            videogamesPerPage={videogamesPerPage}
+            allVideoGames={allVideoGames.length} 
+            paginado={paginado}
+        />
+        </div>
+        </div>
+            { loading ? ( <div class="loading">Loading...</div>) : 
+            (currentVideogames && currentVideogames.map(v => 
+            <Card id={v.id} 
+            rating={v.rating}
+            img={v.image ? v.image : "https://wallpapercave.com/wp/wp8824374.jpg"} 
+            name={v.name} 
+            genres={!v.hasOwnProperty('createdInDataBase') ? 
+            v.genres.map(e => e+' \n ') : v.genres.map(e => e.name + ('\n'))}/>
+            ))}
         </div>
     )
 }

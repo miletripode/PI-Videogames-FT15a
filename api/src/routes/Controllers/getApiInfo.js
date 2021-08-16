@@ -10,7 +10,8 @@ const getApiInfo = async () =>{
             name: v.name,
             image: v.background_image,
             genres: v.genres.map(g => g.name),
-            platforms: v.platforms.map(g => g.platform.name)
+            platforms: v.platforms.map(g => g.platform.name),
+            rating: v.rating
         }
     })
     return apiData;

@@ -6,6 +6,7 @@ import Home from './components/Home';
 import CreatingVideogame from './components/CreatingVideogame';
 import Detail from './components/Detail';
 
+
 function App() {
   return (
     <BrowserRouter>

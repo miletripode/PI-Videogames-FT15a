@@ -4,34 +4,30 @@
     --letter-color: #F6ACC8;
     --font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
-
-.searchContainer{
-    float: left;
+.navbar{
+    height: 100px;
+    background-color: var(--btn-color);
+    margin-top: -18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.input{
-    font-size: 17px;
-    border-radius: 5px;
-    padding: 7px;
-    height: 15px;
-    width: 150px;
-}
-
-.btnSubmit{
+.nav-link{
     background-color: var(--btn-color);
     color: var(--letter-color);
-    font-family: var(--font-family);
     font-size: 20px;
-    margin-left: 5px;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100px;
-    cursor: pointer;
+    text-decoration: none;
+    padding: 7px;
     border: solid 1px;
     border-color: var(--letter-color);
-}
-
-.btnSubmit:hover{
+    border-radius: 5px;
+    font-family: var(--font-family);
+    float: left;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  .nav-link:hover{
     background-color: var(--letter-color);
     color: var(--btn-color);
-}
+  }

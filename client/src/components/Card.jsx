@@ -7,7 +7,6 @@ export default function Card({img, name, genres, id}){
         <div className='container'>
             <div>
                 <NavLink className='navlink' to={`/detail/${id}`}>{name}</NavLink>
-                
             </div>
             <div>
                 <img className='image' src={img} />

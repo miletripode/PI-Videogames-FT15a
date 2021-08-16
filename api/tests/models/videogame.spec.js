@@ -15,8 +15,39 @@ describe('Videogame model', () => {
           .catch(() => done());
       });
       it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Super Mario Bros' });
+        Videogame.create({name: 'Super Mario Bros'});
+      });
+    });
+    describe('rating', () => {
+      it('should throw an error if rating is null', (done) => {
+        Videogame.create({})
+          .then(() => done(new Error('It requires a valid rating')))
+          .catch(() => done());
+      });
+      it('should work when its a valid rating', () => {
+        Videogame.create({rating: '5.4'});
+      });
+    });
+    describe('released', () => {
+      it('should throw an error if released is null', (done) => {
+        Videogame.create({})
+          .then(() => done(new Error('It requires a valid released')))
+          .catch(() => done());
+      });
+      it('should work when its a valid released', () => {
+        Videogame.create({released: '01-02-03'});
+      });
+    });
+    describe('description', () => {
+      it('should throw an error if description is null', (done) => {
+        Videogame.create({})
+          .then(() => done(new Error('It requires a valid description')))
+          .catch(() => done());
+      });
+      it('should work when its a valid description', () => {
+        Videogame.create({description: 'This game is about ...'});
       });
     });
   });
+  
 });
