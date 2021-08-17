@@ -11,47 +11,50 @@ const {API_KEY} = process.env;
 
 router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
-
-    try{
         if(id){
             if(!isNaN(id)){
-                let videoGameDetail = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-                videoGameDetail = videoGameDetail.data
-                videoGameDetail = {
-                    id: videoGameDetail.id,
-                    name: videoGameDetail.name,
-                    image: videoGameDetail.background_image,
-                    genres: videoGameDetail.genres.map(g => g.name),
-                    platforms: videoGameDetail.platforms.map(g => g.platform.name),
-                    description: videoGameDetail.description.replace( /(<([^>]+)>)/ig, ''),
-                    released: videoGameDetail.released,
-                    rating: videoGameDetail.rating
+                try{
+                    let videoGameDetail = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+                    videoGameDetail = videoGameDetail.data
+                    videoGameDetail = {
+                        id: videoGameDetail.id,
+                        name: videoGameDetail.name,
+                        image: videoGameDetail.background_image,
+                        genres: videoGameDetail.genres.map(g => g.name),
+                        platforms: videoGameDetail.platforms.map(g => g.platform.name),
+                        description: videoGameDetail.description.replace( /(<([^>]+)>)/ig, ''),
+                        released: videoGameDetail.released,
+                        rating: videoGameDetail.rating
+                    }
+                    if(videoGameDetail){
+                        return res.status(200).send(videoGameDetail)
+                    }
                 }
-                if(videoGameDetail){
-                    return res.status(200).send(videoGameDetail)
+                catch(e){
+                    next(e)
                 }
             }else{
-                let videogame = await Videogame.findOne({
-                    where: {id:id},
-                    attributes: ['id', 'name', 'createdInDataBase', 'rating', 'description', 'released', 'platforms'],
-                    include: {
-                        model: Genre,
-                        attributes: ['name'],
-                        through: {
-                            attributes: []
+                try{
+                    let videogame = await Videogame.findOne({
+                        where: {id:id},
+                        attributes: ['id', 'name', 'createdInDataBase', 'rating', 'description', 'released', 'platforms'],
+                        include: {
+                            model: Genre,
+                            attributes: ['name'],
+                            through: {
+                                attributes: []
+                            }
                         }
-                    }
-                })
-                return res.status(302).send(videogame)
+                    })
+                    return res.send(videogame)
+                }
+                catch(e){
+                    next(e)
+                }
             }
         }
     }
-    catch(e){
-        next(e)
-    }
-
-   
-})
+)
 
 router.post('/', async (req, res, next) => {
     try{
