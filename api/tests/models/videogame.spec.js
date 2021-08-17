@@ -48,6 +48,16 @@ describe('Videogame model', () => {
         Videogame.create({description: 'This game is about ...'});
       });
     });
+    describe('platforms', () => {
+      it('should throw an error if platforms is null', (done) => {
+        Videogame.create({})
+          .then(() => done(new Error('It requires valid platforms')))
+          .catch(() => done());
+      });
+      it('should work when its valid platforms', () => {
+        Videogame.create({platforms: ['xBox', 'Ps5', 'PC']});
+      });
+    });
   });
   
 });

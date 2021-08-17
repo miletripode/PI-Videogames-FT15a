@@ -4,14 +4,20 @@ var express = require ('express');
 const router = express.Router();
 const getApiInfo = require('./Controllers/getApiInfo')
 
-router.get('/', async (req, res) => {
-    let infoApi = await getApiInfo()
-    let platforms = infoApi.map(p => p.platforms).flat()
+router.get('/', async (req, res, next) => {
+    try{
+        let infoApi = await getApiInfo()
+        let platforms = infoApi.map(p => p.platforms).flat()
 
-    let mySet = new Set(platforms)
-    platforms= Array.from(mySet)
+        let mySet = new Set(platforms)
+        platforms= Array.from(mySet)
+        
+        res.send(platforms)
+    }
+    catch(e){
+        next(e)
+    }
     
-    res.send(platforms)
 })
 
 module.exports = router

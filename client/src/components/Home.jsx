@@ -71,6 +71,7 @@ export default function Home(){
             <div>
             <nav className='navBar'>
             <ul>
+            <li><SearchBar/></li>
             <li>
                 <select onChange={e => handleSort(e)}>
                 <option value=''>Alphabetically</option>
