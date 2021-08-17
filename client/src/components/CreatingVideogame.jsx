@@ -77,9 +77,6 @@ export default function CreatingVideogame(){
     }, []);
 return(
     <div className='creating'>
-        <Link to= '/home'>
-            <button className='btnBack'>Back</button>
-        </Link>
         <div>
         <form onSubmit={(e)=>handleSubmit(e)} className='form'>
             <h1>Create your videogames!</h1>
@@ -146,6 +143,9 @@ return(
             </div>
             <br/>
             <button className='btn' type='submit'>Create Videogame</button>​
+            <Link to= '/home'>
+            <button className='btnBack'>Back</button>
+            </Link>
         </form>
         </div>
     </div>
