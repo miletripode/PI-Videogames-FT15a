@@ -9,7 +9,7 @@ const axios = require('axios');
 var express = require ('express');
 const router = express.Router();
 const getDataBaseInfo = require('./Controllers/getDataBaseInfo')
-const { Videogame} = require('../db');
+const { Videogame, Genre} = require('../db');
 const {API_KEY} = process.env;
 const apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`
 
@@ -27,9 +27,33 @@ router.get('/', async (req, res, next) => {
                 rating: v.rating
             }
         });
-        gamesByName.length ? 
-        res.status(200).send(gamesByName) :
-        res.status(404).send('Does not exist games')
+        let dbGames = await Videogame.findAll({
+            where: {name: name},
+            atributtes: ['id', 'name', 'rating'],
+            include: {
+                model: Genre,
+                attributes: ['name'],
+                through: {
+                attributes: []
+                }
+            }
+        })
+        if(gamesByName.length > 0 && dbGames.length > 0 ){
+            res.status(200).send(dbGames.concat(gamesByName).slice(0,15))
+        }
+        else{
+            if(gamesByName.length > 0){
+                res.status(200).send(gamesByName.slice(0,15))
+            }
+            else{
+                if(dbGames.length > 0){
+                    res.status(200).send(dbGames.slice(0,15))
+                }
+                else{
+                    res.status(404).send('Does not exist games')
+                }
+            }
+        }
     }else{
         let dataBaseInfo = await getDataBaseInfo()
         let arrayApiInfo = [];
