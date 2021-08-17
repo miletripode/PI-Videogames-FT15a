@@ -9,6 +9,7 @@ const axios = require('axios');
 var express = require ('express');
 const router = express.Router();
 const getDataBaseInfo = require('./Controllers/getDataBaseInfo')
+const { Videogame} = require('../db');
 const {API_KEY} = process.env;
 const apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`
 
