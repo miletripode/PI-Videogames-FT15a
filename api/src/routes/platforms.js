@@ -6,9 +6,8 @@ const getApiInfo = require('./Controllers/getApiInfo')
 
 router.get('/', async (req, res, next) => {
     try{
-        let infoApi = await getApiInfo()
-        let platforms = infoApi.map(p => p.platforms).flat()
-
+        let platforms = await getApiInfo()
+        
         let mySet = new Set(platforms)
         platforms= Array.from(mySet)
         
