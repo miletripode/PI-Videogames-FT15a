@@ -13,9 +13,22 @@ ul{
 li{
   list-style-type: none;
   display: inline;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 
+.refresh{
+  background-color: var(--btn-color);
+  color: var(--letter-color);
+  font-size: 20px;
+  text-decoration: none;
+  padding: 7px;
+  border: solid 1px;
+  border-color: var(--letter-color);
+  border-radius: 5px;
+  font-family: var(--font-family);
+  float: left;
+  
+}
 
 .home{
   background-color: var(--bg-color);

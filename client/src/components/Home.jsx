@@ -3,12 +3,9 @@ import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { getAllVideoGames, orderAlphabetically, orderByRating, 
 getGenres, filterByGenre, filterCreated } from '../actions/index';
-import {NavLink} from 'react-router-dom';
 import Card from './Card'
 import './Home.css'
 import Page from "./Page";
-import SearchBar from './SearchBar';
-import NavBar from './NavBar';
 
 export default function Home(){
 
@@ -57,6 +54,11 @@ export default function Home(){
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     };
+
+    function handleOnClick(e){
+        e.preventDefault()
+        dispatch(getAllVideoGames())
+    }
       
     useEffect(() => {
         dispatch(getAllVideoGames()); 
@@ -67,11 +69,9 @@ export default function Home(){
 
     return (
         <div className='home'>
-            <NavBar/>
             <div>
             <nav className='navBar'>
             <ul>
-            <li><SearchBar/></li>
             <li>
                 <select onChange={e => handleSort(e)}>
                 <option value=''>Alphabetically</option>
@@ -101,6 +101,8 @@ export default function Home(){
                 <option value='api'>Api</option>
                 </select>
             </li>
+            <li><button className='refresh' onClick={(e) => {
+           handleOnClick(e)}}>Refresh</button></li>
             </ul>
         </nav>
         <div className='page'>

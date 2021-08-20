@@ -17,6 +17,9 @@ describe('<NavBar />', () => {
   it('Deberia renderizar Tres <Link />', () => {
     expect(wrapper.find(NavLink)).toHaveLength(3);
   });
+  it('Deberia renderizar un <SearchBar />', () => {
+    expect(wrapper.find(SearchBar)).toHaveLength(1);
+  });
   it('El primer Link debe tener el texto "Inicio" y cambiar la ruta hacia "/".', () => {
     expect(wrapper.find(NavLink).at(0).prop('to')).toEqual('/');
     expect(wrapper.find(NavLink).at(0).text()).toEqual('Inicio');
@@ -29,4 +32,7 @@ describe('<NavBar />', () => {
     expect(wrapper.find(NavLink).at(2).prop('to')).toEqual('/create');
     expect(wrapper.find(NavLink).at(2).text()).toEqual('Create Videogame');
   });
+  it('El cuarto componente deberia ser un <SearchBar/>', () => {
+    expect(wrapper.find(SearchBar)).toHaveLength(1)
+  })
 })
