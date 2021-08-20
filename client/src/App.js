@@ -12,7 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <Route exact path='/' component={LandingPage}/>
-      <NavBar/>
       <Route exact path='/home' component={Home}/>
       <Route exact path='/create' component={CreatingVideogame}/>
       <Route exact path='/detail/:id' component={Detail}/>

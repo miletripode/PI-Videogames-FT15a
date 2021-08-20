@@ -6,6 +6,7 @@ getGenres, filterByGenre, filterCreated } from '../actions/index';
 import Card from './Card'
 import './Home.css'
 import Page from "./Page";
+import NavBar from './NavBar';
 
 export default function Home(){
 
@@ -69,7 +70,7 @@ export default function Home(){
 
     return (
         <div className='home'>
-            <div>
+            <NavBar/>
             <nav className='navBar'>
             <ul>
             <li>
@@ -112,7 +113,7 @@ export default function Home(){
             paginado={paginado}
         />
         </div>
-        </div>
+        <div>
             { loading ? ( <div class="loading">Loading...</div>) : 
             (currentVideogames && currentVideogames.map(v => 
             <Card id={v.id} 
@@ -122,6 +123,8 @@ export default function Home(){
             genres={!v.hasOwnProperty('createdInDataBase') ? 
             v.genres.map(e => e+' \n ') : v.genres.map(e => e.name + ('\n'))}/>
             ))}
+        </div>
+        <br></br>
         </div>
     )
 }

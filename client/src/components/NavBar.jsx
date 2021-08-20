@@ -9,7 +9,7 @@ export default function NavBar(){
             <li><NavLink className="nav-link" exact to="/">Inicio</NavLink></li>
             <li> <NavLink className='nav-link' to='/home'>Home</NavLink></li>
             <li> <NavLink className='nav-link' to='/create'>Create Videogame</NavLink></li>
-            <SearchBar/>
+            <li><SearchBar/></li>
       </div>
    );
 };

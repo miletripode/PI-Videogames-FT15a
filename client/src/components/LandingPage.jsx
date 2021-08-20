@@ -9,7 +9,7 @@ export default function LandingPage(){
             <div className='background-image'></div>
             <div className='buttonContainer'>
                 <NavLink to='/home'>
-                    <button className="glow-on-hover">Welcome!</button>
+                    <button className="welcome">Welcome!</button>
                 </NavLink>
             </div>
         </div>

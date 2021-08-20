@@ -5,14 +5,13 @@
     --font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
 .navbar{
-    height: 100px;
-    background-color: var(--btn-color);
-    margin-top: -18px;
+    height: 60px;
+    background-color: var(--btn-color);  
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .nav-link{
     background-color: var(--btn-color);
     color: var(--letter-color);

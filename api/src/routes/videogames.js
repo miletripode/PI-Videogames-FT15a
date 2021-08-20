@@ -11,7 +11,8 @@ const router = express.Router();
 const getDataBaseInfo = require('./Controllers/getDataBaseInfo')
 const { Videogame, Genre} = require('../db');
 const {API_KEY} = process.env;
-const apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`
+const apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`;
+const { Op } = require("sequelize");
 
 router.get('/', async (req, res, next) => {
     let name = req.query.name;
@@ -28,7 +29,9 @@ router.get('/', async (req, res, next) => {
             }
         });
         let dbGames = await Videogame.findAll({
-            where: {name: name},
+            where: {name: {
+                [Op.iLike] : '%'+name+'%'
+            }},
             atributtes: ['id', 'name', 'rating'],
             include: {
                 model: Genre,

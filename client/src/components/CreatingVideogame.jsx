@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {getGenres, getPlatforms, postVideogame} from '../actions/index'
 import { useDispatch, useSelector } from 'react-redux';
 import './CreatingVideogame.css'
+import NavBar from './NavBar';
 
 export function validate(input) {
     let errors = {};
@@ -77,7 +78,7 @@ export default function CreatingVideogame(){
     }, []);
 return(
     <div className='creating'>
-        <div>
+        <NavBar></NavBar>
         <form onSubmit={(e)=>handleSubmit(e)} className='form'>
             <h1>Create your videogames!</h1>
             <div>
@@ -122,6 +123,7 @@ return(
                 <p className="danger">{errors.description}</p>
                 )}
             </div>
+            <br/>
             <div>
             Genres
             <select onChange={(e) => handleSelect(e)}>
@@ -143,11 +145,7 @@ return(
             </div>
             <br/>
             <button className='btn' type='submit'>Create Videogame</button>​
-            <Link to= '/home'>
-            <button className='btnBack'>Back</button>
-            </Link>
         </form>
-        </div>
     </div>
     )
 }
