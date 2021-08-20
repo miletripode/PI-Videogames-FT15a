@@ -26,7 +26,7 @@ return (
             <h2>Rating: {myVideogame.rating}</h2>
             <h2>Platforms: {myVideogame.platforms + ' '}</h2>
             <h2>Description:  {myVideogame.description}</h2>
-            <h2>Genres: {!myVideogame.createdInDataBase ? myVideogame.genres.map(e => e+ ' ')  : myVideogame.genres.map(e => e.name + ' ')}</h2>
+            <h2>Genres: {!myVideogame.createdInDataBase ? myVideogame.genres + ' '  : myVideogame.genres.map(e => e.name + ' ')}</h2>
         </div>
     </div>
 )

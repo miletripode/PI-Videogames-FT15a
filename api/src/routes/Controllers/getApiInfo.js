@@ -9,7 +9,7 @@ const getApiInfo = async () =>{
             platforms: v.platforms.map(g => g.platform.name)
         }
     })
-    return apiData;
+    return apiData.flat();
 }
 
 module.exports = getApiInfo;
