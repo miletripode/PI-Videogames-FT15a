@@ -12,7 +12,7 @@ export default function Card({img, name, genres, id}){
                 <img className='image' src={img} />
             </div>
             <div className='genres'>
-                {genres}
+                {genres.length > 3 ? genres.slice(0,3) : genres}
             </div>
         </div>
     )
