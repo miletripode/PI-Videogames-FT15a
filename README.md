@@ -1,9 +1,5 @@
 # Henry Videogames
 
-<p align="right">
-  <img height="200" src="./videogame.png" />
-</p>
-
 ## Objetivos del Proyecto
 
 - Construir una App utlizando React, Redux, Node y Sequelize.
@@ -11,3 +7,10 @@
 - Aprender mejores prácticas.
 - Aprender y practicar el workflow de GIT.
 - Usar y practicar testing.
+
+<p>
+  <img height="300" src="./Screenshot (60).png" /><br/>
+  <img height="300" src="./Screenshot (62).png" /><br/>
+  <img height="300" src="./Screenshot (63).png" /><br/>
+  <img height="300" src="./Screenshot (99).png" />
+</p>
